@@ -11,7 +11,7 @@ contract StarNotary is ERC721 {
         string name;
     }
 
-    string public constant name = "MorningStar";
+    string public constant name = "Morning Star";
     string public constant symbol = "MOS";
 
     // Implement Task 1 Add a name and symbol properties
@@ -72,16 +72,16 @@ contract StarNotary is ERC721 {
             revert("You already own both stars");
         }
 
-        transferFrom(_tokenOwner1, _tokenOwner2, _tokenId1); 
-        transferFrom(_tokenOwner2, _tokenOwner1, _tokenId2);
+        _transferFrom(_tokenOwner1, _tokenOwner2, _tokenId1); 
+        _transferFrom(_tokenOwner2, _tokenOwner1, _tokenId2);
     }
 
     // Implement Task 1 Transfer Stars
     function transferStar(address _to1, uint256 _tokenId) public {
-        if (ownerOf(_tokenId) != msg.sender) {
+        if (msg.sender != ownerOf(_tokenId)  ) {
             revert("Unautorized Owner");
         }
-        transferFrom(msg.sender, _to1, _tokenId);
+        _transferFrom(msg.sender, _to1, _tokenId);
     }
 
 }
